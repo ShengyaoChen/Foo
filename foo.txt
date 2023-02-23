@@ -1,18 +1,18 @@
 wdir = mntarchiveworkschenrepoKyudoPlaygroundtests
 
-rule SamToFastq
-    input
+rule SamToFastq:
+    input:
         Bam=os.path.join(wdir, {lane}, {sample}.unmapped.bam),
-    output
+    output:
         Fastq1=os.path.join(wdir, {lane}, {sample}.R1.fastq.gz),
         Fastq2=os.path.join(wdir, {lane}, {sample}.R2.fastq.gz)
-    threads 4
-    conda SamToFastq.yaml
-    resources
+    threads: 4
+    conda: SamToFastq.yaml
+    resources:
         mem_mb=16000,
         disk_mb=100000
-    shell
-        
+    shell:
+        """
         touch {output.Fastq1}
         touch {output.Fastq2}
-        
+        """
